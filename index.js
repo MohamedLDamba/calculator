@@ -3,7 +3,11 @@ function calculator() {
   let operation = rs.question(
     "What operation would you like to perform? (+, -, *, /): "
   );
-
+  while (operation === "") {
+    operation = rs.question(
+      "What operation would you like to perform? (+, -, *, /): "
+    );
+  }
   if (
     operation === "/" ||
     operation === "*" ||
@@ -11,14 +15,14 @@ function calculator() {
     operation === "-"
   ) {
     let firstNum = rs.question("Please enter the first number: ");
-    while (isNaN(firstNum)) {
+    while (isNaN(firstNum) || firstNum === "") {
       console.log("This is not a number");
       firstNum = rs.question("Please enter the first number: ");
     }
     firstNum = Number(firstNum);
 
     let secondNum = rs.question("Please enter the second number: ");
-    while (isNaN(secondNum)) {
+    while (isNaN(secondNum) || secondNum === "") {
       secondNum = rs.question("Please enter the second number: ");
       console.log("This is not a number");
     }
