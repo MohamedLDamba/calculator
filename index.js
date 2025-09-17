@@ -1,49 +1,11 @@
-const rs = require("readline-sync");
-function calculator() {
-  let operation = rs.question(
-    "What operation would you like to perform? (+, -, *, /): "
-  );
-  while (operation === "") {
-    operation = rs.question(
-      "What operation would you like to perform? (+, -, *, /): "
-    );
-  }
-  if (
-    operation === "/" ||
-    operation === "*" ||
-    operation === "+" ||
-    operation === "-"
-  ) {
-    let firstNum = rs.question("Please enter the first number: ");
-    while (isNaN(firstNum) || firstNum === "") {
-      console.log("This is not a number");
-      firstNum = rs.question("Please enter the first number: ");
-    }
-    firstNum = Number(firstNum);
+const { getNumber, getOperator, doMath } = require("./helpers.js");
+const { validOperators } = require("./config.js");
 
-    let secondNum = rs.question("Please enter the second number: ");
-    while (isNaN(secondNum) || secondNum === "") {
-      secondNum = rs.question("Please enter the second number: ");
-      console.log("This is not a number");
-    }
-
-    secondNum = Number(secondNum);
-
-    let result;
-
-    if (operation === "+") {
-      result = firstNum + secondNum;
-    } else if (operation === "-") {
-      result = firstNum - secondNum;
-    } else if (operation === "*") {
-      result = firstNum * secondNum;
-    } else if (operation === "/") {
-      result = firstNum / secondNum;
-    }
-
-    console.log("Result: " + result);
-  } else {
-    console.log("That is not a valid operation");
-  }
+function runCalculator() {
+  const op = getOperator(validOperators);
+  const first = getNumber("first");
+  const second = getNumber("second");
+  console.log(doMath(first, second, op));
 }
-calculator();
+
+runCalculator();
